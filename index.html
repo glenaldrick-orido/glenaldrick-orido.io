@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glen Orido | Portfolio</title>
+
+    <style>
+        :root {
+            --background: #0d1117;
+            --surface: #161b22;
+            --border: #30363d;
+            --text: #f0f6fc;
+            --muted: #8b949e;
+            --accent: #58a6ff;
+            --green: #238636;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            background: var(--background);
+            font-family: Arial, sans-serif;
+        }
+
+        .top-container {
+            position: fixed;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            background: #010409;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .menu-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 13px;
+            color: var(--text);
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .menu-button:hover,
+        .profile-button:hover,
+        .contact-link:hover {
+            background: var(--surface);
+        }
+
+        .menu-icon {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .brand {
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        .side-menu {
+            position: fixed;
+            z-index: 20;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100vh;
+            padding: 24px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            transition: left 0.25s ease;
+        }
+
+        .side-menu.open {
+            left: 0;
+        }
+
+        .close-button {
+            float: right;
+            color: var(--muted);
+            background: none;
+            border: 0;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .side-menu h2 {
+            margin-top: 8px;
+        }
+
+        .side-menu a {
+            display: block;
+            padding: 12px 0;
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .side-menu a:hover {
+            color: var(--accent);
+        }
+
+        .overlay {
+            position: fixed;
+            z-index: 15;
+            inset: 0;
+            display: none;
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        .overlay.visible {
+            display: block;
+        }
+
+        main {
+            width: min(1200px, calc(100% - 40px));
+            margin: 96px auto 48px;
+        }
+
+        .profile-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 32px;
+        }
+
+        .profile-card {
+            text-align: center;
+        }
+
+        .avatar {
+            width: 180px;
+            height: 180px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 20px;
+            color: white;
+            background: linear-gradient(135deg, #30363d, #238636);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            font-size: 64px;
+            font-weight: bold;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
+        }
+
+        h1 {
+            margin-bottom: 6px;
+            font-size: 28px;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        .username,
+        .description,
+        .meta {
+            color: var(--muted);
+        }
+
+        .description {
+            line-height: 1.6;
+        }
+
+        .profile-intro {
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .profile-details {
+            padding-top: 18px;
+        }
+
+        .profile-details p {
+            margin-bottom: 12px;
+        }
+
+        .profile-details a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .profile-details a:hover {
+            text-decoration: underline;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tabs a {
+            padding: 12px 4px;
+            color: var(--muted);
+            text-decoration: none;
+        }
+
+        .tabs a:hover,
+        .tabs a.active {
+            color: var(--text);
+        }
+
+        .tabs a.active {
+            border-bottom: 2px solid #f78166;
+        }
+
+        .content-section {
+            scroll-margin-top: 90px;
+        }
+
+        .content-section + .content-section {
+            margin-top: 56px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .about-content {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 24px;
+        }
+
+        .skill {
+            padding: 6px 12px;
+            color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .repo-card {
+            min-height: 170px;
+            padding: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+
+        .repo-card h3 {
+            color: var(--accent);
+            font-size: 17px;
+        }
+
+        .repo-card p {
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .repo-info {
+            display: flex;
+            gap: 18px;
+            margin-top: 24px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .language-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 5px;
+            background: #f1e05a;
+            border-radius: 50%;
+        }
+
+        .contact-card {
+            padding: 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+
+        .contact-card p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .contact-link {
+            padding: 10px 16px;
+            color: var(--text);
+            text-decoration: none;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+
+        @media (max-width: 700px) {
+            .profile-layout,
+            .repo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            main {
+                width: min(100% - 24px, 560px);
+            }
+
+            .profile-card {
+                text-align: left;
+            }
+
+            .avatar {
+                margin: 0 0 20px;
+            }
+
+            .tabs {
+                gap: 12px;
+                overflow-x: auto;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="top-container">
+        <button class="menu-button" id="menuButton" aria-label="Open menu" aria-expanded="false">
+            <span class="menu-icon">☰</span>
+            <span>Menu</span>
+        </button>
+
+        <span class="brand">My Portfolio</span>
+    </header>
+
+    <!-- Change this for additional options -->
+    <aside class="side-menu" id="sideMenu" aria-hidden="true">
+        <button class="close-button" id="closeButton" aria-label="Close menu">×</button>
+        <h2>Menu</h2>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main>
+        <div class="profile-layout">
+            <aside class="profile-card">
+                <div class="avatar">G</div>
+
+                <div class="profile-intro">
+                    <h1>Orido, Glen Aldrick M.</h1>
+                    <p class="username">@glenOrido</p>
+                    <p class="description">Computer Science student exploring web development, programming, and technology.</p>
+                </div>
+
+                <div class="profile-details">
+                    <p class="meta">Location: Cavite, Philippines</p>
+                    <p class="meta">Status: Student</p>
+                </div>
+            </aside>
+
+            <section>
+                <nav class="tabs" aria-label="Portfolio sections">
+                    <a class="active" href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+
+                <section class="content-section" id="about">
+                    <div class="section-heading">
+                        <h2>About me</h2>
+                        <span class="meta">Profile overview</span>
+                    </div>
+
+                    <div class="about-content">
+                        <p>
+                            Hello! I'm Glen Aldrick Orido, a computer science student.
+                        </p>
+                        <p>
+                            This portfolio contains information about me, don't expect too much from this.
+                        </p>
+                        <ul>
+                            <li>Currently pursuing a degree in Computer Science</li>
+                            <li>Currently struggling with coding</li>
+                        </ul>
+
+                        <div class="skills">
+                            <span class="skill">HTML</span>
+                            <span class="skill">CSS</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section" id="projects">
+                    <div class="section-heading">
+                        <h2>Activities & Projects</h2>
+                        <span class="meta">Project Available</span>
+                    </div>
+
+                    <div class="repo-grid">
+                        <article class="repo-card">
+                            <h3>No Project Available</h3>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="content-section" id="contact">
+                    <div class="section-heading">
+                        <h2>Contact</h2>
+                        <span class="meta">Let's connect</span>
+                    </div>
+
+                    <div class="contact-card">
+                        <p>
+                            Feel free to contact me through any of the platforms
+                            below. I'll be happy to hear from you.
+                        </p>
+
+                        <div class="contact-links">
+                            <a class="contact-link" href="mailto:glenaldrick.orido@cvsu.edu.ph" target="_blank" rel="noopener noreferrer">
+                                Email me
+                            </a>
+
+                            <a class="contact-link" href="https://github.com/glenaldrick-orido" target="_blank" rel="noopener noreferrer">
+                                GitHub
+                            </a>
+
+                            <a class="contact-link" href="https://www.facebook.com/glenaldrick.orido" target="_blank" rel="noopener noreferrer">
+                                Facebook
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const menuButton = document.getElementById("menuButton");
+        const closeButton = document.getElementById("closeButton");
+        const sideMenu = document.getElementById("sideMenu");
+        const overlay = document.getElementById("overlay");
+
+        function openMenu() {
+            sideMenu.classList.add("open");
+            overlay.classList.add("visible");
+            sideMenu.setAttribute("aria-hidden", "false");
+            menuButton.setAttribute("aria-expanded", "true");
+        }
+
+        function closeMenu() {
+            sideMenu.classList.remove("open");
+            overlay.classList.remove("visible");
+            sideMenu.setAttribute("aria-hidden", "true");
+            menuButton.setAttribute("aria-expanded", "false");
+        }
+
+        menuButton.addEventListener("click", openMenu);
+        closeButton.addEventListener("click", closeMenu);
+        overlay.addEventListener("click", closeMenu);
+
+        document.querySelectorAll(".side-menu a").forEach((link) => {
+            link.addEventListener("click", closeMenu);
+        });
+
+        document.querySelectorAll(".tabs a").forEach((tab) => {
+            tab.addEventListener("click", () => {
+                document.querySelectorAll(".tabs a").forEach((item) => {
+                    item.classList.remove("active");
+                });
+
+                tab.classList.add("active");
+            });
+        });
+    </script>
+</body>
+</html>
