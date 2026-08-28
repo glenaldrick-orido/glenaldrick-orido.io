@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glen Orido | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="top-container">
+        <button class="menu-button" id="menuButton" aria-label="Open menu" aria-expanded="false">
+            <span class="menu-icon">☰</span>
+            <span>Menu</span>
+        </button>
+
+        <span class="brand">My Portfolio</span>
+    </header>
+
+    <aside class="side-menu" id="sideMenu" aria-hidden="true">
+        <button class="close-button" id="closeButton" aria-label="Close menu">×</button>
+        <h2>Menu</h2>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main>
+        <div class="profile-layout">
+            <aside class="profile-card">
+                <div class="avatar">
+                    <span class="avatar-letter">G</span>
+                    <img src="profile-photo.jpg" alt="Glen Orido">
+                </div>
+
+                <div class="profile-intro">
+                    <h1>Orido, Glen Aldrick M.</h1>
+                    <p class="username">@glenOrido</p>
+                    <p class="description">Computer Science student exploring web development, programming, and technology.</p>
+                </div>
+
+                <div class="profile-details">
+                    <p class="meta">Location: Cavite, Philippines</p>
+                    <p class="meta">Status: Student</p>
+                </div>
+            </aside>
+
+            <section>
+                <nav class="tabs" aria-label="Portfolio sections">
+                    <a class="active" href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+
+                <section class="content-section" id="about">
+                    <div class="section-heading">
+                        <h2>About me</h2>
+                        <span class="meta">Profile overview</span>
+                    </div>
+
+                    <div class="about-content">
+                        <p>
+                            Hello! I'm Glen Aldrick Orido, a computer science student.
+                        </p>
+                        <p>
+                            This portfolio contains information about me, don't expect too much from this.
+                        </p>
+                        <ul>
+                            <li>Currently pursuing a degree in Computer Science</li>
+                            <li>Currently struggling with coding</li>
+                        </ul>
+
+                        <div class="skills">
+                            <span class="skill">HTML</span>
+                            <span class="skill">CSS</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section" id="projects">
+                    <div class="section-heading">
+                        <h2>Activities & Quizes</h2>
+                    </div>
+
+                    <div class="repo-grid">
+                        <article class="repo-card">
+                            <h3>Quiz 1</h3>
+                            <button class="gallery-preview" id="galleryPreview" aria-label="Open Quiz 1 images">
+                                <img src="quiz1-front.jpg" alt="Quiz 1 front page">
+                            </button>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="content-section" id="contact">
+                    <div class="section-heading">
+                        <h2>Contact</h2>
+                        <span class="meta">Let's connect</span>
+                    </div>
+
+                    <div class="contact-card">
+                        <p>
+                            Feel free to contact me through any of the platforms
+                            below. I'll be happy to hear from you.
+                        </p>
+
+                        <div class="contact-links">
+                            <a class="contact-link" href="mailto:glenaldrick.orido@cvsu.edu.ph" target="_blank" rel="noopener noreferrer">
+                                Email me
+                            </a>
+
+                            <a class="contact-link" href="https://github.com/glenaldrick-orido" target="_blank" rel="noopener noreferrer">
+                                GitHub
+                            </a>
+
+                            <a class="contact-link" href="https://www.facebook.com/glenaldrick.orido" target="_blank" rel="noopener noreferrer">
+                                Facebook
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Quiz 1 image gallery" aria-hidden="true">
+        <div class="lightbox-content">
+            <button class="gallery-button lightbox-close" id="galleryClose" aria-label="Exit image gallery">×</button>
+            <button class="gallery-button" id="galleryBack" aria-label="Previous image">‹</button>
+            <img class="lightbox-image" id="lightboxImage" src="quiz1-front.jpg" alt="Quiz 1 front page">
+            <button class="gallery-button" id="galleryNext" aria-label="Next image">›</button>
+        </div>
+    </div>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
