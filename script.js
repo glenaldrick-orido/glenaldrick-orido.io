@@ -35,26 +35,45 @@ document.querySelectorAll(".tabs a").forEach((tab) => {
     });
 });
 
-const galleryImages = [
-    { src: "quiz1-front.jpg", alt: "Quiz 1 front page" },
-    { src: "quiz1-back.jpg", alt: "Quiz 1 back page" }
-];
-const galleryPreview = document.getElementById("galleryPreview");
+const galleryConfig = {
+    quiz1: [
+        { src: "quiz1-front.jpg", alt: "Quiz 1 front page" },
+        { src: "quiz1-back.jpg", alt: "Quiz 1 back page" }
+    ],
+    midterm: [
+        { src: "Midterm.jpg", alt: "Midterm front page" }
+    ]
+};
+const galleryPreviews = document.querySelectorAll(".gallery-preview");
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightboxImage");
 const galleryClose = document.getElementById("galleryClose");
 const galleryBack = document.getElementById("galleryBack");
 const galleryNext = document.getElementById("galleryNext");
+let activeGallery = [];
 let currentImage = 0;
+let focusAfterClose = null;
 
 function showGalleryImage(index) {
-    currentImage = (index + galleryImages.length) % galleryImages.length;
-    lightboxImage.src = galleryImages[currentImage].src;
-    lightboxImage.alt = galleryImages[currentImage].alt;
+    if (!activeGallery.length) {
+        return;
+    }
+
+    currentImage = (index + activeGallery.length) % activeGallery.length;
+    lightboxImage.src = activeGallery[currentImage].src;
+    lightboxImage.alt = activeGallery[currentImage].alt;
 }
 
-function openGallery() {
-    showGalleryImage(0);
+function updateGalleryControls() {
+    const showControls = activeGallery.length > 1;
+    galleryBack.hidden = !showControls;
+    galleryNext.hidden = !showControls;
+}
+
+function openGallery(images, startIndex = 0) {
+    activeGallery = images;
+    updateGalleryControls();
+    showGalleryImage(startIndex);
     lightbox.classList.add("open");
     lightbox.setAttribute("aria-hidden", "false");
     galleryClose.focus();
@@ -63,10 +82,21 @@ function openGallery() {
 function closeGallery() {
     lightbox.classList.remove("open");
     lightbox.setAttribute("aria-hidden", "true");
-    galleryPreview.focus();
+    if (focusAfterClose) {
+        focusAfterClose.focus();
+    }
 }
 
-galleryPreview.addEventListener("click", openGallery);
+galleryPreviews.forEach((preview) => {
+    preview.addEventListener("click", () => {
+        focusAfterClose = preview;
+        const galleryName = preview.dataset.gallery || "quiz1";
+        const galleryImages = galleryConfig[galleryName] || galleryConfig.quiz1;
+        const startIndex = Number.parseInt(preview.dataset.startIndex || "0", 10);
+        openGallery(galleryImages, startIndex);
+    });
+});
+
 galleryClose.addEventListener("click", closeGallery);
 galleryBack.addEventListener("click", () => showGalleryImage(currentImage - 1));
 galleryNext.addEventListener("click", () => showGalleryImage(currentImage + 1));

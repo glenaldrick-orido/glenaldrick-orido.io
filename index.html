@@ -37,8 +37,8 @@
 
                 <div class="profile-intro">
                     <h1>Orido, Glen Aldrick M.</h1>
-                    <p class="username">@glenOrido</p>
-                    <p class="description">Computer Science student exploring web development, programming, and technology.</p>
+                    <p class="username">@GA.O</p>
+                    <p class="description">Computer Science student with no knowledge about technologies.</p>
                 </div>
 
                 <div class="profile-details">
@@ -81,14 +81,20 @@
 
                 <section class="content-section" id="projects">
                     <div class="section-heading">
-                        <h2>Activities & Quizes</h2>
+                        <h2>Modules</h2>
                     </div>
 
                     <div class="repo-grid">
                         <article class="repo-card">
                             <h3>Quiz 1</h3>
-                            <button class="gallery-preview" id="galleryPreview" aria-label="Open Quiz 1 images">
+                            <button type="button" class="gallery-preview" id="quiz1Preview" data-gallery="quiz1" data-start-index="0" aria-label="Open Quiz 1 images">
                                 <img src="quiz1-front.jpg" alt="Quiz 1 front page">
+                            </button>
+                        </article>
+                        <article class="repo-card">
+                            <h3>Midterm</h3>
+                            <button type="button" class="gallery-preview" id="midtermPreview" data-gallery="midterm" data-start-index="0" aria-label="Open Midterm images">
+                                <img src="Midterm.jpg" alt="Midterm front page">
                             </button>
                         </article>
                     </div>
@@ -127,10 +133,10 @@
 
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Quiz 1 image gallery" aria-hidden="true">
         <div class="lightbox-content">
-            <button class="gallery-button lightbox-close" id="galleryClose" aria-label="Exit image gallery">×</button>
-            <button class="gallery-button" id="galleryBack" aria-label="Previous image">‹</button>
+            <button class="gallery-button lightbox-close" id="galleryClose" aria-label="Exit image gallery">></button>
+            <button class="gallery-button" id="galleryBack" aria-label="Previous image"><</button>
             <img class="lightbox-image" id="lightboxImage" src="quiz1-front.jpg" alt="Quiz 1 front page">
-            <button class="gallery-button" id="galleryNext" aria-label="Next image">›</button>
+            <button class="gallery-button" id="galleryNext" aria-label="Next image">></button>
         </div>
     </div>
 
